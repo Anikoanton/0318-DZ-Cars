@@ -19,7 +19,7 @@ public class Main {
 
        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
        //семафор для тунеля чтобы проезажало только половина машин
-       Semaphore sm = new Semaphore(CARS_COUNT/2);
+       Semaphore sm = new Semaphore(CARS_COUNT/2, false);
        // счетчик для старта
        // final CountDownLatch cdl_start = new CountDownLatch(CARS_COUNT);
        // передаем симофор в тунель
@@ -27,6 +27,8 @@ public class Main {
         Car[] cars = new Car[CARS_COUNT];
        // создаем объек CyclicBarrier для синхронизации сарта
        CyclicBarrier cb = new CyclicBarrier(CARS_COUNT);
+
+       // создаем объект класса с обектами concurent
        Concur Conc = new Concur(CARS_COUNT);
 
         for (int i = 0; i < cars.length; i++) {

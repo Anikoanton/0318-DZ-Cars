@@ -34,10 +34,10 @@ public class Car implements Runnable {
         try {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
-            System.out.println(this.name + " готов");
+            System.out.println(this.name + " готов" + " со  скоростью " + this.speed);
             // обратный отчет для начала старта
             concur.cd_start.countDown();
-            this.cb1.await();
+
             // начать гонку только тогда когда все будут готовы
 
             //cd_st.countDown();
@@ -45,6 +45,16 @@ public class Car implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+            this.cb1.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+
+
         for (int i = 0; i < race.getStages().size(); i++) {
 
                 race.getStages().get(i).go(this);
